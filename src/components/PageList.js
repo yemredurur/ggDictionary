@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import { ListView, View } from 'react-native';
 import { connect } from 'react-redux';
-import { employeesFetch, logoutUser } from '../actions';
+import { pagesFetch, logoutUser } from '../actions';
 import ListItem from './ListItem';
 import {Button, CardSection} from './common';
 
-class EmployeeList extends Component {
+class PageList extends Component {
     componentWillMount(){
-        this.props.employeesFetch();
+        this.props.pagesFetch();
 
         this.createDataSource(this.props);
     }
@@ -19,16 +19,16 @@ class EmployeeList extends Component {
         this.createDataSource(nextProps);
     }
 
-    createDataSource({ employees }) {
+    createDataSource({ pages }) {
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
 
-        this.dataSource = ds.cloneWithRows(employees);
+        this.dataSource = ds.cloneWithRows(pages);
     }
 
-    renderRow(employee) {
-        return <ListItem employee={employee} />
+    renderRow(pages) {
+        return <ListItem pages={pages} />
     }
 
     logoutUser() {
@@ -54,13 +54,13 @@ class EmployeeList extends Component {
 }
 
 const mapStateToProps = state => {
-    const employees = _.map(state.employees, (val, uid) => {
+    const pages = _.map(state.pages, (val, uid) => {
         return { ...val, uid };
     });
 
-    return { employees };
+    return { pages };
 };
 
 export default connect(mapStateToProps, {
-    employeesFetch, logoutUser
-})(EmployeeList);
+    pagesFetch, logoutUser
+})(PageList);

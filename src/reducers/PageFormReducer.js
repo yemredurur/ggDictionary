@@ -1,26 +1,26 @@
 import {
-    EMPLOYEE_UPDATE,
-    EMPLOYEE_CREATE,
-    EMPLOYEES_FETCH_SUCCESS,
-    EMPLOYEE_SAVE_SUCCESS,
-    EMPLOYEE_DELETE_SUCCESS
+    PAGE_UPDATE,
+    PAGE_CREATE,
+    PAGES_FETCH_SUCCESS,
+    PAGE_SAVE_SUCCESS,
+    PAGE_DELETE_SUCCESS
 } from '../actions/types';
 
 const INITIAL_STATE = {
-    name: '',
-    phone: '',
-    shift: ''
+    title: '',
+    description: '',
+    type: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch  (action.type) {
-        case EMPLOYEE_UPDATE:
+        case PAGE_UPDATE:
             return {...state, [action.payload.prop]: action.payload.value };
-        case EMPLOYEE_CREATE:
+        case PAGE_CREATE:
             return INITIAL_STATE;
-        case EMPLOYEE_SAVE_SUCCESS:
+        case PAGES_FETCH_SUCCESS:
             return INITIAL_STATE;
-        case EMPLOYEE_DELETE_SUCCESS:
+        case PAGE_DELETE_SUCCESS:
             return INITIAL_STATE;
         default:
             return state;

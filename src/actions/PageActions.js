@@ -2,66 +2,66 @@ import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 
 import {
-    EMPLOYEE_UPDATE,
-    EMPLOYEE_CREATE,
-    EMPLOYEES_FETCH_SUCCESS,
-    EMPLOYEE_SAVE_SUCCESS,
-    EMPLOYEE_DELETE_SUCCESS
+    PAGE_UPDATE,
+    PAGE_CREATE,
+    PAGES_FETCH_SUCCESS,
+    PAGE_SAVE_SUCCESS,
+    PAGE_DELETE_SUCCESS
 } from './types';
 
-export const employeeUpdate = ({ prop, value }) => {
+export const pageUpdate = ({ prop, value }) => {
     return {
-        type: EMPLOYEE_UPDATE,
+        type: PAGE_UPDATE,
         payload: { prop, value }
     };
 };
 
-export const employeeCreate = ({ name, phone, shift }) => {
+export const pageCreate = ({ title, description, type }) => {
     const { currentUser } = firebase.auth();
 
     return (dispatch) => {
-        firebase.database().ref(`users/${currentUser.uid}/employees`)
-            .push({ name, phone, shift })
+        firebase.database().ref(`pages/${currentUser.uid}/employees`)
+            .push({ title, description, type })
             .then(() => {
-                dispatch({ type: EMPLOYEE_CREATE });
+                dispatch({ type: PAGE_CREATE });
                 Actions.employeeList({ type: 'reset' })
             });
     };
 };
 
-export const employeesFetch = () => {
+export const pagesFetch = () => {
     const { currentUser } = firebase.auth();
 
     return (dispatch) => {
         firebase.database().ref(`users/${currentUser.uid}/employees`)
             .on('value', snapshot => {
-                dispatch({ type: EMPLOYEES_FETCH_SUCCESS, payload: snapshot.val() })
+                dispatch({ type: PAGES_FETCH_SUCCESS, payload: snapshot.val() })
             });
     };
 };
 
 
-export const employeeSave = ({ name, phone, shift, uid }) => {
+export const pageSave = ({ title, description, type, uid }) => {
     const { currentUser } = firebase.auth();
 
     return (dispatch) => {
         firebase.database().ref(`users/${currentUser.uid}/employees/${uid}`)
-            .set({ name, phone, shift })
+            .set({ title, description, type })
             .then(() => {
-                dispatch({ type: EMPLOYEE_SAVE_SUCCESS });
+                dispatch({ type: PAGE_SAVE_SUCCESS });
                 Actions.employeeList({ type: 'reset' })
             });
     };
 };
 
-export const employeeDelete = ({ uid }) => {
+export const pageDelete = ({ uid }) => {
     const { currentUser } = firebase.auth();
 
     return (dispatch) => {
         firebase.database().ref(`users/${currentUser.uid}/employees/${uid}`)
             .remove()
             .then(() => {
-                dispatch({ type: EMPLOYEE_DELETE_SUCCESS });
+                dispatch({ type: PAGE_DELETE_SUCCESS });
                 Actions.employeeList({ type: 'reset' })
             });
     };

@@ -2,24 +2,24 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import Communications from 'react-native-communications';
-import  { employeeUpdate, employeeSave, employeeDelete } from '../actions';
+import  { pageUpdate, pageSave, pageDelete } from '../actions';
 import { Card, CardSection, Button, Confirm } from './common';
-import EmployeeForm from './EmployeeForm';
+import PageForm from './PageForm';
 
 
 
-class EmployeeEdit extends Component {
+class PageEdit extends Component {
     state = { showModal: false };
 
     componentWillMount() {
-        _.each(this.props.employee, (value, prop) => {
-            this.props.employeeUpdate({ prop, value })
+        _.each(this.props.page, (value, prop) => {
+            this.props.pageUpdate({ prop, value })
         });
     }
 
     onButtonPress() {
         const { name, phone, shift } = this.props;
-        this.props.employeeSave({ name, phone, shift, uid: this.props.employee.uid });
+        this.props.pageSave({ name, phone, shift, uid: this.props.page.uid });
     }
 
     onTextPress() {
@@ -33,7 +33,7 @@ class EmployeeEdit extends Component {
 
     onAccept() {
         this.setState({ showModal: false });
-        this.props.employeeDelete({ uid: this.props.employee.uid });
+        this.props.pageDelete({ uid: this.props.page.uid });
     }
 
     onDecline() {
@@ -43,7 +43,7 @@ class EmployeeEdit extends Component {
     render() {
         return (
             <Card>
-                <EmployeeForm />
+                <pageForm />
                 <CardSection>
                     <Button onPress={this.onButtonPress.bind(this)}>
                         Save Changes
@@ -75,11 +75,11 @@ class EmployeeEdit extends Component {
 }
 
 
-const mapStateToProps = (state) => {
-    const { name, phone, shift } = state.employeeForm;
-    return { name, phone, shift };
+const mapStateToProps = ({ pageForm }) => {
+    const { title, description, type } = pageForm;
+    return { title, description, type };
 };
 
 export default connect(mapStateToProps, {
-    employeeUpdate, employeeSave, employeeDelete
-})(EmployeeEdit);
+    pageUpdate, pageSave, pageDelete
+})(PageEdit);
