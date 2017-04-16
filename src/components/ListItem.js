@@ -16,7 +16,7 @@ class ListItem extends  Component {
                 <View>
                     <CardSection>
                         <Text style={styles.titleStyle}>
-                            {title}
+                            {title} - {type}
                         </Text>
                         <Text style={styles.descStyle}>
                             {description}
