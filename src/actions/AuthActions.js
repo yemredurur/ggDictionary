@@ -42,7 +42,7 @@ export const logoutUser = () => {
     return (dispatch) => {
         dispatch({ type: LOGOUT_USER });
         firebase.auth().signOut();
-        Actions.auth();
+        Actions.auth({ type: 'reset' });
     };
 };
 
