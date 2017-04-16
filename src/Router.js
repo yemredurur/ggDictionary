@@ -21,7 +21,7 @@ const RouterComponent = () => {
                     initial
                 />
                 <Scene
-                    key="employeeCreate"
+                    key="pageCreate"
                     component={PageCreate}
                     title="Create Pages"
                 />

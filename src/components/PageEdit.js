@@ -18,14 +18,14 @@ class PageEdit extends Component {
     }
 
     onButtonPress() {
-        const { name, phone, shift } = this.props;
-        this.props.pageSave({ name, phone, shift, uid: this.props.page.uid });
+        const { title, description, type } = this.props;
+        this.props.pageSave({ title, description, type , uid: this.props.page.uid });
     }
-
+/*
     onTextPress() {
         const { phone, shift } = this.props;
         Communications.text(phone, `Your upcoming shift is on ${shift}`);
-    }
+    }*/
 
     fireEmployee() {
         this.setState({ showModal: !this.state.showModal });
@@ -43,16 +43,10 @@ class PageEdit extends Component {
     render() {
         return (
             <Card>
-                <pageForm />
+                <PageForm />
                 <CardSection>
                     <Button onPress={this.onButtonPress.bind(this)}>
                         Save Changes
-                    </Button>
-                </CardSection>
-
-                <CardSection>
-                    <Button onPress={this.onTextPress.bind(this)}>
-                        Text Shedule
                     </Button>
                 </CardSection>
 

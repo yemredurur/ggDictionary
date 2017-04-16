@@ -5,18 +5,21 @@ import { CardSection } from './common';
 
 class ListItem extends  Component {
     onRowPress() {
-        Actions.employeeEdit({ employee: this.props.employee });
+        Actions.pageEdit({ page: this.props.page });
     }
 
     render() {
-        const { name } = this.props.employee;
+        const { title, description, type } = this.props.page;
 
         return (
             <TouchableOpacity onPress={this.onRowPress.bind(this)}>
                 <View>
                     <CardSection>
                         <Text style={styles.titleStyle}>
-                            {name}
+                            {title}
+                        </Text>
+                        <Text style={styles.descStyle}>
+                            {description}
                         </Text>
                     </CardSection>
                 </View>
@@ -28,7 +31,12 @@ class ListItem extends  Component {
 
 const styles = {
     titleStyle: {
+        fontSize: 20,
+        paddingLeft: 15
+    },
+    descStyle: {
         fontSize: 18,
+        paddingTop: 10,
         paddingLeft: 15
     }
 }

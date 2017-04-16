@@ -22,7 +22,7 @@ class PageForm extends Component {
                         label="Page Detail"
                         placeholder="Details about the page"
                         multiline="true"
-                        value={this.props.phone}
+                        value={this.props.description}
                         onChangeText={value => this.props.pageUpdate({ prop: 'description', value })}
                     />
                 </CardSection>
@@ -30,8 +30,8 @@ class PageForm extends Component {
                 <CardSection>
                     <Text style={styles.pickerLabelStyle}>Page Type</Text>
                     <Picker
-                        selectedValue={this.props.shift}
-                        onValueChange={value => this.props.pageUpdate({ prop: 'pageType', value })}
+                        selectedValue={this.props.type}
+                        onValueChange={value => this.props.pageUpdate({ prop: 'type', value })}
                         style={{ flex: 1, flexDirection: 'column'  }}
                     >
                         <Picker.Item label="Error List" value="Error" />
