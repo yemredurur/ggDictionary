@@ -1,26 +1,30 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { CardSection } from './common';
+import { CardSection, ContainerSection } from './common';
 
 class ListItem extends  Component {
     onRowPress() {
-        Actions.pageEdit({ page: this.props.page });
+        Actions.pageEdit({ page: this.props.pages });
     }
 
     render() {
-        const { title, description, type } = this.props.page;
+        const { title, description, type } = this.props.pages;
 
         return (
             <TouchableOpacity onPress={this.onRowPress.bind(this)}>
                 <View>
                     <CardSection>
+                        <ContainerSection>
                         <Text style={styles.titleStyle}>
                             {title} - {type}
                         </Text>
-                        <Text style={styles.descStyle}>
-                            {description}
-                        </Text>
+                        </ContainerSection>
+                        <ContainerSection>
+                            <Text style={styles.descStyle}>
+                                {description}
+                            </Text>
+                        </ContainerSection>
                     </CardSection>
                 </View>
             </TouchableOpacity>

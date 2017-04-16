@@ -21,7 +21,7 @@ class PageForm extends Component {
                     <Input
                         label="Page Detail"
                         placeholder="Details about the page"
-                        multiline="true"
+                        multiline={true}
                         value={this.props.description}
                         onChangeText={value => this.props.pageUpdate({ prop: 'description', value })}
                     />

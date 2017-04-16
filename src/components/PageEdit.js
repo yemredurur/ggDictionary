@@ -52,7 +52,7 @@ class PageEdit extends Component {
 
                 <CardSection>
                     <Button onPress={this.fireEmployee.bind(this)}>
-                        Fire Employee
+                        Delete Page
                     </Button>
                 </CardSection>
 
@@ -61,7 +61,7 @@ class PageEdit extends Component {
                     onAccept={this.onAccept.bind(this)}
                     onDecline={this.onDecline.bind(this)}
                 >
-                    Are you sure you want to delete this?
+                    Are you sure you want to delete this page?
                 </Confirm>
             </Card>
         )
