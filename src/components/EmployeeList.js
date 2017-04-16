@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import { ListView } from 'react-native';
+import { ListView, View } from 'react-native';
 import { connect } from 'react-redux';
-import { employeesFetch } from '../actions';
+import { employeesFetch, logoutUser } from '../actions';
 import ListItem from './ListItem';
+import {Button, CardSection} from './common';
 
 class EmployeeList extends Component {
     componentWillMount(){
@@ -30,14 +31,24 @@ class EmployeeList extends Component {
         return <ListItem employee={employee} />
     }
 
+    logoutUser() {
+        this.props.logoutUser();
+    }
+
     render() {
-        console.log(this.props);
         return (
-            <ListView
-                enableEmptySections
-                dataSource={this.dataSource}
-                renderRow={this.renderRow}
-            />
+            <View>
+                <ListView
+                    enableEmptySections
+                    dataSource={this.dataSource}
+                    renderRow={this.renderRow}
+                />
+                <CardSection>
+                    <Button onPress={this.logoutUser.bind(this)}>
+                        Log Out
+                    </Button>
+                </CardSection>
+            </View>
         )
     }
 }
@@ -51,5 +62,5 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
-    employeesFetch
+    employeesFetch, logoutUser
 })(EmployeeList);
